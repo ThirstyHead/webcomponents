@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Element</title>
+
+  <script>
+  'use strict';
+  var MyDurationProto = Object.create(HTMLElement.prototype);
+
+  MyDurationProto.createdCallback = function(){
+      let minutes = this.getAttribute('minutes');
+      let display = this.getAttribute('display');
+      let minutesLabel = (minutes === 1 ? 'minute' : 'minutes');
+      let output = `${minutes} ${minutesLabel}`;
+
+      switch(display){
+        case 'hours':
+          let hours = Math.trunc(minutes / 60);
+          let remainder = minutes % 60;
+          let hoursLabel = (hours === 1 ? 'hour' : 'hours');
+          let remainderLabel = (remainder === 1 ? 'minute' : 'minutes');
+          output = `${hours} ${hoursLabel} ${remainder} ${remainderLabel}`;
+          break;
+      }
+
+      let span = document.createElement('span');
+      span.innerHTML = output;
+      this.appendChild(span);
+  };
+
+  //NOTE: all custom element names must contain a hyphen
+  document.registerElement('my-duration', {
+     prototype: MyDurationProto
+  });
+  </script>
+</head>
+<body>
+  <p>The duration is <my-duration minutes="90" display="hours" /></p>
+
+</body>
+</html>

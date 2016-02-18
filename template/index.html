@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Template</title>
+
+  <template id="my-duration-template">
+    <style>
+      .container {
+        background-color: gold;
+      }
+    </style>
+
+    <span class="container"></span>
+  </template>
+
+  <script>
+  'use strict';
+  var MyDurationProto = Object.create(HTMLElement.prototype);
+
+  MyDurationProto.createdCallback = function(){
+    let minutes = this.getAttribute('minutes');
+    let display = this.getAttribute('display');
+    let minutesLabel = (minutes === 1 ? 'minute' : 'minutes');
+    let output = `${minutes} ${minutesLabel}`;
+
+    switch(display){
+      case 'hours':
+        let hours = Math.trunc(minutes / 60);
+        let remainder = minutes % 60;
+        let hoursLabel = (hours === 1 ? 'hour' : 'hours');
+        let remainderLabel = (remainder === 1 ? 'minute' : 'minutes');
+        output = `${hours} ${hoursLabel} ${remainder} ${remainderLabel}`;
+        break;
+    }
+
+    let template = document.querySelector( '#my-duration-template').content;
+    let el = document.importNode(template, true);
+    el.querySelector('.container').textContent = output;
+    this.appendChild(el);
+  };
+
+  //NOTE: all custom element names must contain a hyphen
+  document.registerElement('my-duration', {
+     prototype: MyDurationProto
+  });
+  </script>
+</head>
+<body>
+  <p>The duration is <my-duration minutes="91" display="hours" /></p>
+
+  <p class="container"> Hi Max!</p>
+
+</body>
+</html>

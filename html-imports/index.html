@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Imports</title>
+  <link id="myDurationImport" rel="import" href="my-duration.html" />
+
+  <script>
+  'use strict';
+  let myDurationImport = document.querySelector('#myDurationImport').import;
+  let template = myDurationImport.querySelector('#my-duration-template');
+  let js = myDurationImport.querySelector('#my-duration-js');
+
+  document.head.appendChild(document.importNode(template, true));
+  document.head.appendChild(document.importNode(js, true));
+  loadMyDuration();
+  </script>
+</head>
+<body>
+  <p>The duration is <my-duration minutes="92" display="hours" /></p>
+
+  <p class="container">Here's another .container that is NO LONGER misstyled...</p>
+
+</body>
+</html>
