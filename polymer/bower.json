@@ -1,0 +1,23 @@
+{
+  "name": "polymer",
+  "homepage": "https://github.com/ThirstyHead/webcomponents",
+  "authors": [
+    "Scott Davis <scott@thirstyhead.com>"
+  ],
+  "description": "Examples of Polymer Web Components",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.6.0",
+    "paper-button": "PolymerElements/paper-button#^1.0.12",
+    "paper-input": "PolymerElements/paper-input#^1.1.14",
+    "google-youtube": "GoogleWebComponents/google-youtube#^1.2.1"
+  }
+}
